@@ -9,9 +9,9 @@ services:
     networks:
       - classic
     environment:
-      POSTGRES_USER: root
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: pass
-      POSTGRES_DB: music
+      POSTGRES_DB: music_db
 
   backend:
     build: .
@@ -20,9 +20,9 @@ services:
     env_file:
       - .env
     environment:
-      DB_USER: root
+      DB_USER: postgres
       DB_PASSWORD: pass
-      DB_URL: jdbc:postgresql://db:5432/music
+      DB_URL: jdbc:postgresql://db:5432/music_db
     depends_on:
       - db
     networks:
