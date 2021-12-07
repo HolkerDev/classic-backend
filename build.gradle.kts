@@ -19,6 +19,9 @@ repositories {
     mavenCentral()
 }
 
+val kotlinVersion = "1.6.0"
+val kluentVersion = "1.68"
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -27,6 +30,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
+    testImplementation("org.amshove.kluent:kluent:$kluentVersion")
+
 }
 
 tasks.withType<KotlinCompile> {
