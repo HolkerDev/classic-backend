@@ -4,10 +4,16 @@ spring:
   application:
     name: classic
   datasource:
+    hikari:
+      leak-detection-threshold: 2000
+      max-lifetime: 60000
     url: '${DB_URL}'
     username: '${DB_USER}'
     password: '${DB_PASSWORD}'
     driver-class-name: org.postgresql.Driver
+    dbcp2:
+      test-on-borrow: true
+      test-while-idle: true
 springdoc:
   swagger-ui:
     path: /docs.html
