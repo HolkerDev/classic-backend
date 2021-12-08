@@ -32,7 +32,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
     testImplementation("org.amshove.kluent:kluent:$kluentVersion")
-
+    testImplementation ("org.mockito.kotlin:mockito-kotlin:4.0.0")
 }
 
 tasks.withType<KotlinCompile> {
@@ -50,7 +50,7 @@ val dependencyServices = setOf("db")
 
 dockerCompose {
     projectName = "classic"
-    stopContainers = false
+    stopContainers = true
 
     dependencyServices.forEach { dependency ->
         nested(dependency).apply {

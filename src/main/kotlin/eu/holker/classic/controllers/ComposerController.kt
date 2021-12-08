@@ -1,20 +1,18 @@
 package eu.holker.classic.controllers
 
-import eu.holker.classic.services.RecordService
+import eu.holker.classic.services.ComposerService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/records")
-class RecordController(
-    private val recordService: RecordService,
-) {
+@RequestMapping("/composers")
+class ComposerController(private val composerService: ComposerService) {
 
-    @GetMapping("")
+    @GetMapping("/")
     fun getAll(): ResponseEntity<*> {
-        val records = recordService.findAllRecords()
-        return ResponseEntity.ok(records)
+        val composers = composerService.findAllComposers()
+        return ResponseEntity.ok(composers)
     }
 }
