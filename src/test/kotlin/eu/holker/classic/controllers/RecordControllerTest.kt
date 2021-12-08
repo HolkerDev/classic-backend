@@ -22,6 +22,15 @@ class RecordControllerTest {
     }
 
     @Test
+    fun `record controller getAll should return 200 when record list is not empty`() {
+        val recordList = listOf(RecordDto(1, "dwa"), RecordDto(2, "dawd"))
+        recordService.stub { on { findAllRecords() }.doReturn(recordList) }
+        val res = controller.getAll()
+        res.statusCode shouldBeEqualTo HttpStatus.OK
+        res.body shouldBeEqualTo recordList
+    }
+
+    @Test
     fun `record controller getById should return 200 when record is found`() {
         val recordId = 12
         val dto = RecordDto(12, "dawdawd")
