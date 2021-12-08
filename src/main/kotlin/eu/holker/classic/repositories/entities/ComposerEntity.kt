@@ -7,7 +7,7 @@ import javax.persistence.*
 @Table(name = "t_composer")
 class ComposerEntity(
     var name: String,
-    var firstName: String,
+    var firstName: String?,
     var lastName: String,
 ) {
     @Id
@@ -16,4 +16,4 @@ class ComposerEntity(
 }
 
 val ComposerEntity.dto: ComposerDto
-    get() = ComposerDto(id, name, firstName, lastName)
+    get() = ComposerDto(id, name, firstName ?: "", lastName)

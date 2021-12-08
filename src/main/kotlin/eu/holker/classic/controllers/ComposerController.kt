@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/composers")
-class ComposerController(private val composerService: ComposerService) {
+class ComposerController(
+    private val composerService: ComposerService
+) {
 
-    @GetMapping("/")
+    @GetMapping("")
     fun getAll(): ResponseEntity<*> {
         val composers = composerService.findAllComposers()
         return ResponseEntity.ok(composers)
