@@ -1,6 +1,7 @@
 package eu.holker.classic.controllers
 
 import eu.holker.classic.services.RecordService
+import eu.holker.classic.services.dto.ErrorDto
 import eu.holker.classic.services.dto.RecordDto
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -46,6 +47,6 @@ class RecordControllerTest {
         recordService.stub { on { findRecordById(recordId) }.doReturn(Result.failure(Exception("Error message test"))) }
         val res = controller.getById(recordId = recordId.toString())
         res.statusCode shouldBeEqualTo HttpStatus.BAD_REQUEST
-        res.body shouldBeEqualTo "Error message test"
+        res.body shouldBeEqualTo ErrorDto("Error message test")
     }
 }
