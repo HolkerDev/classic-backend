@@ -1,9 +1,12 @@
 package eu.holker.classic.controllers
 
 import eu.holker.classic.services.ComposerService
+import eu.holker.classic.services.dto.ErrorDto
 import io.swagger.v3.oas.annotations.tags.Tag
+import mu.KLogging
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -19,4 +22,15 @@ class ComposerController(
         val composers = composerService.findAllComposers()
         return ResponseEntity.ok(composers)
     }
+
+    @GetMapping("/{composerId}/opuses")
+    fun getOpusesByComposer(@PathVariable composerId: Int): ResponseEntity<*> {
+        return composerService.findOpusesByComposerId(composerId).fold(onSuccess = {
+            ResponseEntity.ok(it)
+        }, onFailure = {
+            ResponseEntity.badRequest().body(ErrorDto(it.message))
+        })
+    }
+
+    companion object : KLogging()
 }

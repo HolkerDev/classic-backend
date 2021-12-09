@@ -13,6 +13,9 @@ class ComposerEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Int = 0
+
+    @OneToMany(mappedBy = "composer", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    var opuses: List<OpusEntity> = arrayListOf()
 }
 
 val ComposerEntity.dto: ComposerDto
