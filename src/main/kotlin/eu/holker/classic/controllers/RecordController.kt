@@ -15,13 +15,6 @@ import org.springframework.web.bind.annotation.RestController
 class RecordController(
     private val recordService: RecordService,
 ) {
-
-    @GetMapping("")
-    fun getAll(): ResponseEntity<*> {
-        val records = recordService.findAllRecords()
-        return ResponseEntity.ok(records)
-    }
-
     @GetMapping("/{recordId}")
     fun getById(@PathVariable recordId: String): ResponseEntity<*> {
         recordService.findRecordById(recordId.toInt())

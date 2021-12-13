@@ -15,6 +15,9 @@ class OpusEntity(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "composer_id")
     var composer: ComposerEntity = ComposerEntity("", "", "")
+
+    @OneToMany(mappedBy = "opus", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    var records: List<RecordEntity> = arrayListOf()
 }
 
 val OpusEntity.dto: OpusDto
