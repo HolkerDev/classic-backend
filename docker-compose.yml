@@ -12,6 +12,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: music_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
   backend:
     build: .
@@ -27,6 +29,9 @@ services:
       - db
     networks:
       - classic
+
+volumes:
+  pgdata:
 
 networks:
   classic:

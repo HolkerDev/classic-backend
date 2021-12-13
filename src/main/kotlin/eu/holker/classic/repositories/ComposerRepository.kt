@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ComposerRepository : JpaRepository<ComposerEntity, Int>
+interface ComposerRepository : JpaRepository<ComposerEntity, Int> {
+    fun findByLastName(lastName: String): List<ComposerEntity>
+}

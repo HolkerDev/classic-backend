@@ -1,14 +1,12 @@
 package eu.holker.classic.controllers
 
 import eu.holker.classic.services.ComposerService
+import eu.holker.classic.services.dto.ComposerDto
 import eu.holker.classic.services.dto.ErrorDto
 import io.swagger.v3.oas.annotations.tags.Tag
 import mu.KLogging
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @Tag(name = "Composers")
 @RestController
@@ -18,8 +16,11 @@ class ComposerController(
 ) {
 
     @GetMapping("")
-    fun getAll(): ResponseEntity<*> {
-        val composers = composerService.findAllComposers()
+    fun getComposersFiltered(@RequestParam(name = "lastname") lastName: String?): ResponseEntity<*> {
+        var composers = listOf<ComposerDto>()
+        lastName?.let {
+            composers = composerService.findComposersByLastName(lastName)
+        }
         return ResponseEntity.ok(composers)
     }
 
