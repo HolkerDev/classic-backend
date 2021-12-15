@@ -19,7 +19,7 @@ internal class ComposerServiceTest {
     private val composerService = ComposerService(composerRepository)
 
     @Test
-    fun test() {
+    fun `should return composer dto on findById if composer exists`() {
         val composerId = 1
         val composerEntity = ComposerEntity("name", "first_name", "lastname")
         composerRepository.stub { on { findById(composerId) }.doReturn(Optional.of(composerEntity)) }
@@ -30,7 +30,7 @@ internal class ComposerServiceTest {
     }
 
     @Test
-    fun test1() {
+    fun `should return exception on findById if composer doesn't exist`() {
         val composerId = 1
         composerRepository.stub {
             on { findById(composerId) }.doReturn(Optional.empty())
@@ -41,7 +41,7 @@ internal class ComposerServiceTest {
     }
 
     @Test
-    fun test2() {
+    fun `should return empty list on findComposerByLastname if there are not composers`() {
         val composerLastName = "Smitt"
         composerRepository.stub { on { findByLastNameContains(composerLastName) }.doReturn(listOf()) }
         val composers = composerService.findComposersByLastName(composerLastName)
@@ -49,7 +49,7 @@ internal class ComposerServiceTest {
     }
 
     @Test
-    fun test3() {
+    fun `should return 2 composers on findComposerByLastname if there are 2 composers`() {
         val composerLastName = "Smitt"
         val composerEntities =
             listOf(ComposerEntity("name1", null, "lastname1"), ComposerEntity("name2", "firstName1", "lastname2"))
@@ -60,7 +60,7 @@ internal class ComposerServiceTest {
     }
 
     @Test
-    fun test4() {
+    fun `should return opuses on findOpusesByComposerId if there are opuses`() {
         val composerId = 1
         val composerEntity = composerEntity()
         composerEntity.opuses = listOf(OpusEntity("1"))
@@ -72,7 +72,7 @@ internal class ComposerServiceTest {
     }
 
     @Test
-    fun test5() {
+    fun `should return exception on findOpusesByComposerId if there is no composer with id`() {
         val composerId = 1
         composerRepository.stub { on { findById(composerId) }.doReturn(Optional.empty()) }
         val opusesResult = composerService.findOpusesByComposerId(composerId)
