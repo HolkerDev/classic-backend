@@ -28,6 +28,15 @@ class ComposerController(
         return ResponseEntity.ok(composers)
     }
 
+    @GetMapping("/{composerId}")
+    fun getComposerById(@PathVariable composerId: Int): ResponseEntity<*> {
+        return composerService.findComposerById(composerId).fold(onSuccess = {
+            ResponseEntity.ok(it)
+        }, onFailure = {
+            ResponseEntity.badRequest().body(ErrorDto(it.message))
+        })
+    }
+
     @GetMapping("/{composerId}/opuses")
     fun getOpusesByComposer(@PathVariable composerId: Int): ResponseEntity<*> {
         return composerService.findOpusesByComposerId(composerId).fold(onSuccess = {

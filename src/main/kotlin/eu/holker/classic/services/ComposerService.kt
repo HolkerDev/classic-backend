@@ -21,6 +21,15 @@ class ComposerService(
         return composerRepository.findByLastNameContains(lastName).map { it.dto }
     }
 
+    fun findComposerById(composerId: Int): Result<ComposerDto> {
+        val composer = composerRepository.findById(composerId)
+        if (composer.isPresent) {
+            return Result.success(composer.get().dto)
+        } else {
+            return Result.failure(Exception("There is no composer with such id"))
+        }
+    }
+
     fun findOpusesByComposerId(composerId: Int): Result<List<OpusDto>> {
         val composer = composerRepository.findById(composerId)
         return if (composer.isPresent) {
