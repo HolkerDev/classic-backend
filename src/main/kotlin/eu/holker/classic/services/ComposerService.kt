@@ -11,22 +11,16 @@ import org.springframework.stereotype.Service
 class ComposerService(
     private val composerRepository: ComposerRepository,
 ) {
-    fun findAllComposers(): List<ComposerDto> {
-        return composerRepository.findAll().map {
-            it.dto
-        }
-    }
-
     fun findComposersByLastName(lastName: String): List<ComposerDto> {
         return composerRepository.findByLastNameContains(lastName).map { it.dto }
     }
 
     fun findComposerById(composerId: Int): Result<ComposerDto> {
         val composer = composerRepository.findById(composerId)
-        if (composer.isPresent) {
-            return Result.success(composer.get().dto)
+        return if (composer.isPresent) {
+            Result.success(composer.get().dto)
         } else {
-            return Result.failure(Exception("There is no composer with such id"))
+            Result.failure(Exception("There is no composer with such id"))
         }
     }
 

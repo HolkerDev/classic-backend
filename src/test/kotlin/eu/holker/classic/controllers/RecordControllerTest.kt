@@ -10,7 +10,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.springframework.http.HttpStatus
 
-class RecordControllerTest {
+internal class RecordControllerTest {
     private val recordService = mock<RecordService> { }
     private val controller = RecordController(recordService)
 
