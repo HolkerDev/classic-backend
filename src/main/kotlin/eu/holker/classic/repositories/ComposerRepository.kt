@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ComposerRepository : JpaRepository<ComposerEntity, Int> {
-    fun findByLastName(lastName: String): List<ComposerEntity>
+    fun findByLastNameContains(lastName: String): List<ComposerEntity>
 }
