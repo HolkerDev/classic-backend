@@ -33,6 +33,9 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-ui:1.5.13")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.5.13")
 
+    implementation("org.springframework.boot:spring-boot-starter-security:2.6.1")
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
+
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
