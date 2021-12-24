@@ -25,7 +25,7 @@ class JwtUtils {
             .subject
     }
 
-    fun generateJwtToken(authentication: Authentication): String? {
+    fun generateJwtToken(authentication: Authentication): String {
         val userPrincipal = authentication.principal as User
         return Jwts.builder()
             .setSubject(userPrincipal.username)
@@ -49,6 +49,8 @@ class JwtUtils {
             logger.error("JWT token is unsupported: {}", e.message)
         } catch (e: IllegalArgumentException) {
             logger.error("JWT claims string is empty: {}", e.message)
+        } catch (e: NullPointerException) {
+            logger.error { "JWT token is null" }
         }
         return false
     }

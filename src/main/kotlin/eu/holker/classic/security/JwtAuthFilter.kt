@@ -22,7 +22,7 @@ class JwtAuthFilter(private val userDetailsService: UserDetailsService, private 
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        val token = request.jwtToken
+        val token: String? = request.jwtToken
         if (token != null && jwtUtils.validateJwtToken(token)) {
             jwtUtils.getEmailFromJwtToken(token)?.let { email ->
                 val userDetails = userDetailsService.loadUserByEmail(email)

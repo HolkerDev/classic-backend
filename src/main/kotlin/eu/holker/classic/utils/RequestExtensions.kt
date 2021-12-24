@@ -7,5 +7,5 @@ import javax.servlet.http.HttpServletRequest
 val HttpServletRequest.jwtToken: String?
     get() {
         val header = this.getHeader(HttpHeaders.AUTHORIZATION)
-        return if (header.contains("Bearer ")) header.substringAfter("Bearer ") else null
+        return if (header != null && header.contains("Bearer ")) header.substringAfter("Bearer ") else null
     }
