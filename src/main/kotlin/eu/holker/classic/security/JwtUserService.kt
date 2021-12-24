@@ -21,4 +21,4 @@ class JwtUserService(private val userRepository: UserRepository) : UserDetailsSe
     companion object : KLogging()
 }
 
-fun UserDetailsService.loadUserByEmail(email: String) = this.loadUserByUsername(email)
+fun UserDetailsService.loadUserByEmail(email: String): UserDetails = this.loadUserByUsername(email)

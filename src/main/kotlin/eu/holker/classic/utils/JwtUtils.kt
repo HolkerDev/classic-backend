@@ -12,7 +12,7 @@ import java.util.Date
 @Component
 class JwtUtils {
 
-    @Value("\${classic.app.jwtSecret}")
+    @Value("\${app.jwt.secret}")
     lateinit var secret: String
 
     val expiration: Long = 432200000 // 8 days

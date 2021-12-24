@@ -17,6 +17,6 @@ spring:
 springdoc:
   swagger-ui:
     path: /docs.html
-classic:
-  app:
-    jtwSecret: secretRandom
+app:
+  jwt:
+    secret: secretRandom
