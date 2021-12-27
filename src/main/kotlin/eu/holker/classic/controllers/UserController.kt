@@ -4,12 +4,15 @@ import eu.holker.classic.controllers.forms.LoginForm
 import eu.holker.classic.controllers.forms.RegisterForm
 import eu.holker.classic.controllers.responses.TokenResponse
 import eu.holker.classic.services.UserService
+import eu.holker.classic.services.dto.ErrorDto
 import eu.holker.classic.utils.JwtUtils
 import mu.KLogging
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -34,6 +37,15 @@ class UserController(
     @PostMapping("/register")
     fun register(@RequestBody registerForm: RegisterForm): ResponseEntity<*> { // TODO: Add validation
         return ResponseEntity.ok(userService.createUser(registerForm.email, registerForm.password))
+    }
+
+    @GetMapping("/{userId}")
+    fun getById(@PathVariable userId: Int): ResponseEntity<*> {
+        userService.findByUserId(userId).fold(onSuccess = {
+            return ResponseEntity.ok(it)
+        }, onFailure = {
+            return ResponseEntity.badRequest().body(ErrorDto(it.message))
+        })
     }
 
     companion object : KLogging()
