@@ -18,10 +18,10 @@ class UserService(private val userRepository: UserRepository, private val passwo
 
     fun findByUserId(userId: Int): Result<UserDto> {
         val user = userRepository.findById(userId)
-        if (user.isPresent) {
-            return Result.success(user.get().dto)
-        }else{
-            return Result.failure(Exception("User with such id was not found"))
+        return if (user.isPresent) {
+            Result.success(user.get().dto)
+        } else {
+            Result.failure(Exception("User with such id was not found"))
         }
     }
 
