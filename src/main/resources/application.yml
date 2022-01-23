@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: classic
+  flyway:
+    baselineOnMigrate: true
   datasource:
     hikari:
       leak-detection-threshold: 2000
@@ -20,3 +22,8 @@ springdoc:
 app:
   jwt:
     secret: secretRandom
+flyway:
+  url: '${DB_URL}'
+  password: '${DB_PASSWORD}'
+  user: '${DB_USER}'
+

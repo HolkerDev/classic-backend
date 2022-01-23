@@ -28,12 +28,12 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("io.github.microutils:kotlin-logging-jvm:2.1.0")
+    implementation("io.github.microutils:kotlin-logging-jvm:2.1.21")
     // Swagger
-    implementation("org.springdoc:springdoc-openapi-ui:1.5.13")
-    implementation("org.springdoc:springdoc-openapi-kotlin:1.5.13")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.3")
+    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.3")
 
-    implementation("org.springframework.boot:spring-boot-starter-security:2.6.1")
+    implementation("org.springframework.boot:spring-boot-starter-security:2.6.2")
     implementation("io.jsonwebtoken:jjwt:0.9.1")
 
     runtimeOnly("org.postgresql:postgresql")
@@ -41,6 +41,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
     testImplementation("org.amshove.kluent:kluent:$kluentVersion")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    implementation("org.flywaydb:flyway-core:8.4.2")
 }
 
 tasks.withType<KotlinCompile> {
